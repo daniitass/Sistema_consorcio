@@ -1,4 +1,5 @@
 ## Trabajo Práctico  BBDD 
+![1](https://github.com/daniitass/Sistema_consorcio/assets/106636843/8c248a6a-5c77-4a04-8027-edcd99c9b236)
 
 ### Problema:
 Enunciado del problema a resolver.
