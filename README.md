@@ -39,6 +39,12 @@ En base a estas preguntas:
 **¿Cuántos responsables se pueden registrar por unidad funcional?**
 - Se puede registrar la cantidad necesaria de responsables por unidad funcional.
 
+**¿Las expensas tienen vencimiento ?**
+- Las expensas se ingresan al sistema con una fecha de vencimiento. Al vencerse se le aumenta a su monto un 15 % , el cual se cobrará en la siguiente factura, no se permite  abonar el monto vencido.
+
+**¿Cúal es la forma de pago de las expensas?**
+- Se abona únicamente por “Pago mis cuentas “ o red de “Pago Fácil” .
+
 
 ## Para ser usuario
 - Debe tener acceso a la cuenta bancaria y al mail para verificar el pago.
