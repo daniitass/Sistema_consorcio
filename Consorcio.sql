@@ -1,68 +1,53 @@
 create database consorcio;
 use consorcio;
 
-CREATE TABLE Unidad_Funcional (
+CREATE TABLE Direcciones (
+    Direccion_ID INT PRIMARY KEY,
+    Calle VARCHAR(15),
+    Altura INT,
+    Esquina VARCHAR(15),
+    Barrio VARCHAR(15)
+);
+
+CREATE TABLE Unidad_funcional (
     UF_ID INT PRIMARY KEY,
-    Depto VARCHAR(10),
+    Unidad VARCHAR(3),
     Piso INT,
-    Dirección VARCHAR(100),
-    Residente_ID INT,
-    FOREIGN KEY (Residente_ID) REFERENCES Residente(Residente_ID)
+    Direccion VARCHAR(35),
+    Direccion_ID INT,
+    FOREIGN KEY (Direccion_ID) REFERENCES Direcciones(Direccion_ID)
 );
 
-CREATE TABLE Residente (
-    Residente_ID INT PRIMARY KEY,
-    Nombre VARCHAR(50),
-    Apellido VARCHAR(50),
-    Mail VARCHAR(50),
-    Tipo VARCHAR(10)
+CREATE TABLE Responsable (
+    Responsable_ID INT PRIMARY KEY,
+    Nombre VARCHAR(20),
+    Apellido VARCHAR(20),
+    Mail VARCHAR(20),
+    Teléfono INT
 );
 
-CREATE TABLE Registro_de_Vivienda (
-    Registro_vivienda_ID INT PRIMARY KEY,
-    UF_ID INT,
-    Residente_ID INT,
-    FOREIGN KEY (UF_ID) REFERENCES Unidad_Funcional(UF_ID),
-    FOREIGN KEY (Residente_ID) REFERENCES Residente(Residente_ID)
-);
-
-CREATE TABLE Cobra_Haber (
-    Cobra_Haber_ID INT PRIMARY KEY,
-    Encargado_ID INT,
-    FOREIGN KEY (Encargado_ID) REFERENCES Encargado(Encargado_ID)
-);
-
-CREATE TABLE Encargado (
-    Encargado_ID INT PRIMARY KEY,
-    Nombre VARCHAR(50),
-    Apellido VARCHAR(50),
-    CUIT VARCHAR(20),
-    DNI VARCHAR(20),
-    Teléfono VARCHAR(20),
-    Mail VARCHAR(50)
-);
-
-CREATE TABLE Haber_Encargado (
-    Haber_ID INT PRIMARY KEY,
-    Monto FLOAT,
-    Fecha_Haber DATE,
-    Cobra_Haber_ID INT,
-    FOREIGN KEY (Cobra_Haber_ID) REFERENCES Cobra_Haber(Cobra_Haber_ID)
-);
-
-CREATE TABLE Pago_Expensa (
-    Pago_ID INT PRIMARY KEY,
+CREATE TABLE Pago_expensas (
+    Expensas_ID INT PRIMARY KEY,
     Fecha_pago DATE,
-    Monto FLOAT,
-    DNI VARCHAR(20),
-    Registro_vivienda_ID INT,
-    FOREIGN KEY (Registro_vivienda_ID) REFERENCES Registro_de_Vivienda(Registro_vivienda_ID)
+    Fecha_limite DATE,
+    Monto FLOAT(10),
+    Periodo VARCHAR(14),
+    Saldo_anterior FLOAT(10)
 );
 
-CREATE TABLE Incluye_Haber (
-    Incluye_Haber_ID INT PRIMARY KEY,
-    Pago_ID INT,
-    Haber_ID INT,
-    FOREIGN KEY (Pago_ID) REFERENCES Pago_Expensa(Pago_ID),
-    FOREIGN KEY (Haber_ID) REFERENCES Haber_Encargado(Haber_ID)
+CREATE TABLE Responsable_unidad_funcional (
+    ID_RUF INT PRIMARY KEY,
+    Responsable_ID INT,
+    UF_ID INT,
+    FOREIGN KEY (Responsable_ID) REFERENCES Responsable(Responsable_ID),
+    FOREIGN KEY (UF_ID) REFERENCES Unidad_funcional(UF_ID)
 );
+
+CREATE TABLE Responsable_pago_expensas (
+    ID_RPE INT PRIMARY KEY,
+    Responsable_ID INT,
+    Expensas_ID INT,
+    FOREIGN KEY (Responsable_ID) REFERENCES Responsable(Responsable_ID),
+    FOREIGN KEY (Expensas_ID) REFERENCES Pago_expensas(Expensas_ID)
+);
+
